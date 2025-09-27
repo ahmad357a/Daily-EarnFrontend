@@ -752,23 +752,37 @@ export default function LuckyDrawControl() {
                 <Label className="text-sm font-medium">Receipt Image</Label>
                 <div className="mt-2">
                   {selectedParticipation.receiptUrl ? (
-                    <img
-                      src={selectedParticipation.receiptUrl}
-                      alt="Receipt"
-                      className="max-w-full h-auto rounded-lg border"
-                      onError={(e) => {
-                        console.error('Failed to load image:', selectedParticipation.receiptUrl);
-                        e.currentTarget.style.display = 'none';
-                        e.currentTarget.nextElementSibling.style.display = 'block';
-                      }}
-                    />
-                  ) : null}
-                  <div 
-                    className="hidden p-4 text-center text-gray-500 border rounded-lg"
-                    style={{ display: selectedParticipation.receiptUrl ? 'none' : 'block' }}
-                  >
-                    <p>No receipt image available</p>
-                  </div>
+                    <div className="space-y-2">
+                      <img
+                        src={selectedParticipation.receiptUrl}
+                        alt="Receipt"
+                        className="max-w-full h-auto max-h-96 rounded-lg border shadow-sm"
+                        onError={(e) => {
+                          console.error('Failed to load image:', selectedParticipation.receiptUrl);
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.nextElementSibling.style.display = 'block';
+                        }}
+                      />
+                      <div className="flex items-center space-x-2">
+                        <a 
+                          href={selectedParticipation.receiptUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:text-blue-800 underline text-sm"
+                        >
+                          Open in new tab
+                        </a>
+                        <span className="text-gray-400">•</span>
+                        <span className="text-xs text-gray-500">
+                          Uploaded via Cloudinary
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="p-4 text-center text-gray-500 border rounded-lg bg-gray-50">
+                      <p>No receipt image available</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
